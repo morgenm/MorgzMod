@@ -3,8 +3,8 @@
   "id": "modid",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Morgz Mod",
+  "description": "The Morgz Client",
   "authors": [
     "Me!"
   ],
@@ -19,7 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.fabricmc.morgz.MorgzMod"
+    ],
+    "client": [
+      "net.fabricmc.morgz.MorgzModClient"
     ]
   },
   "mixins": [
@@ -29,6 +32,7 @@
   "depends": {
     "fabricloader": ">=0.14.10",
     "fabric-api": "*",
+    "fabric-key-binding-api-v1": "*",
     "minecraft": "~1.19",
     "java": ">=17"
   },
