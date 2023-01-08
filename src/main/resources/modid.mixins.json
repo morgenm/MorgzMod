@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "BlockMixin"
+    "BlockMixin",
+    "ChunkLightProviderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
