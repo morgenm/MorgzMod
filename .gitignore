@@ -4,6 +4,7 @@
 build/
 out/
 classes/
+build_out/
 
 # eclipse
 
