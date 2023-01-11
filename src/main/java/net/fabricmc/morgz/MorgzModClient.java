@@ -12,11 +12,17 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil.Type;
+import net.minecraft.text.Text;
+
+import java.util.Iterator;
+import java.util.Vector;
 
 public class MorgzModClient implements ClientModInitializer {
     private HacksData hacksData = HacksData.getInstance();
     private static KeyBinding keyBindingXray;
     private static KeyBinding keyBindingFullbright;
+
+    private String enabledHacksNamesStack[];
 
     public MorgzModClient() {
     }
@@ -24,6 +30,15 @@ public class MorgzModClient implements ClientModInitializer {
     public void onInitializeClient() {
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             MinecraftClient.getInstance().inGameHud.getTextRenderer().drawWithShadow(matrixStack, "MorgzMod", 1.0F, 1.0F, 16777215);
+
+            Vector<String> enabledHacks = HacksData.getEnabledHacksNames();
+            Iterator h = enabledHacks.iterator();
+            float y = 15f;
+            while(h.hasNext()) {
+                MinecraftClient.getInstance().inGameHud.getTextRenderer().drawWithShadow(matrixStack, (String) h.next(), 1.0F, y, 16777215);
+                //System.out.println(h.next());
+                y += 15f;
+            }
         });
         ClientTickEvents.END_CLIENT_TICK.register((client) -> {
             while(keyBindingXray.wasPressed()) {

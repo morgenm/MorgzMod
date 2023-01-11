@@ -5,11 +5,16 @@
 
 package net.fabricmc.morgz;
 
+import java.util.Vector;
+
 public class HacksData {
     private static HacksData INSTANCE;
     private boolean xrayEnabled = false;
     private boolean fullbrightEnabled = false;
     private boolean fullbrightManuallyEnabled = false;
+
+    // Right now just used to write enabled hacks to screen. Later maybe replace with Hack class
+    private static Vector<String> enabledHacks = new Vector<String>();
 
     private HacksData() {
     }
@@ -24,6 +29,13 @@ public class HacksData {
 
     public void toggleXrayEnabled() {
         this.xrayEnabled = !this.xrayEnabled;
+
+        if(xrayEnabled) {
+            enabledHacks.addElement("Xray");
+        }
+        else {
+            enabledHacks.removeElement("Xray");
+        }
     }
 
     public boolean getXrayEnabled() {
@@ -33,6 +45,13 @@ public class HacksData {
     public void toggleFullbrightManuallyEnabled() {
         this.fullbrightEnabled = !this.fullbrightEnabled;
         this.fullbrightManuallyEnabled = !this.fullbrightManuallyEnabled;
+
+        if(fullbrightManuallyEnabled) {
+            enabledHacks.addElement("Fullbright");
+        }
+        else {
+            enabledHacks.removeElement("Fullbright");
+        }
     }
 
     public void enableFullbrightXray() {
@@ -49,5 +68,9 @@ public class HacksData {
 
     public boolean getFullbrightManuallyEnabled() {
         return this.fullbrightManuallyEnabled;
+    }
+
+    static public Vector<String> getEnabledHacksNames() {
+        return enabledHacks;
     }
 }
